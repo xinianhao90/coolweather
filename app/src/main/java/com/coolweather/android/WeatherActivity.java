@@ -1,5 +1,6 @@
 package com.coolweather.android;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.Image;
@@ -204,7 +205,7 @@ public class WeatherActivity extends AppCompatActivity {
     处理并展示Weather实体类中的数据
      */
      public void showWeatherInfo(Weather weather) {
-        String cityName = weather.basic.cityName;
+         String cityName = weather.basic.cityName;
          String updateTime = weather.basic.update.updateTime.split(" ")[1];
          String degree = weather.now.temperature + "℃";
          String weatherInfo = weather.now.more.info;
@@ -236,5 +237,8 @@ public class WeatherActivity extends AppCompatActivity {
          carWashText.setText(carWath);
          sportText.setText(sport);
          weatherLayout.setVisibility(View.VISIBLE);
+         //开启后台服务
+         Intent intent = new Intent(this, AutoUpdateService.class);
+         startService(intent);
      }
 }
